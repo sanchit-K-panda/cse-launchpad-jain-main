@@ -10,6 +10,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useSignup } from "./useSignup";
 import { signupSchema, SignupInput } from "./signup.schema";
 import { cn } from "@/lib/utils";
+import { Controller } from "react-hook-form";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -110,6 +118,28 @@ const SignUpPage = () => {
                             />
                             {form.formState.errors.confirmPassword && (
                                 <p className="text-sm text-red-400">{form.formState.errors.confirmPassword.message}</p>
+                            )}
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label className="text-white">Role</Label>
+                            <Controller
+                                control={form.control}
+                                name="role"
+                                render={({ field }) => (
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <SelectTrigger className="bg-white/5 border-white/10 text-white focus:ring-slate-400">
+                                            <SelectValue placeholder="Select a role" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="student">Student</SelectItem>
+                                            <SelectItem value="mentor">Mentor</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                )}
+                            />
+                            {form.formState.errors.role && (
+                                <p className="text-sm text-red-400">{form.formState.errors.role.message}</p>
                             )}
                         </div>
 
