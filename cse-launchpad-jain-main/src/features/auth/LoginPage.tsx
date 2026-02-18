@@ -184,6 +184,24 @@ const LoginPage = () => {
                     </p>
                 </CardFooter>
             </Card>
+
+            {/* 🛑 VERCEL DEBUG INFO - REMOVE AFTER FIXING */}
+            <div className="absolute bottom-4 right-4 p-4 bg-black/80 text-xs text-white rounded border border-white/10 z-50">
+                <p className="font-bold mb-2">Vercel Debug Info:</p>
+                <div className="flex flex-col gap-1">
+                    <span className={import.meta.env.VITE_SUPABASE_URL ? "text-green-400" : "text-red-400"}>
+                        URL: {import.meta.env.VITE_SUPABASE_URL ? "✅ Loaded" : "❌ Missing"}
+                    </span>
+                    <span className={import.meta.env.VITE_SUPABASE_ANON_KEY ? "text-green-400" : "text-red-400"}>
+                        Key: {import.meta.env.VITE_SUPABASE_ANON_KEY ? "✅ Loaded" : "❌ Missing"}
+                    </span>
+                    <span className="text-slate-500 mt-1">
+                        Run: {new Date().toISOString().split('T')[1].split('.')[0]}
+                    </span>
+                </div>
+            </div>
+            {/* 🛑 END DEBUG INFO */}
+
         </div>
     );
 };
