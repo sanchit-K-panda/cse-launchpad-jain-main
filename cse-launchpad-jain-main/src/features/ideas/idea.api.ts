@@ -1,51 +1,59 @@
 import { IdeaInput } from "./idea.schema";
-
-
-// Mock database
-const ideas: (IdeaInput & { id: string, author: string, date: string })[] = [
-    {
-        id: "1",
-        title: "Smart Waste Management",
-        description: "IoT-based waste bins that notify collection trucks when full.",
-        category: "Environment",
-        isPublic: true,
-        author: "John Doe",
-        date: "2024-03-15"
-    },
-    {
-        id: "2",
-        title: "AI Tutor for Rural Education",
-        description: "An offline-first AI tutor app for students in remote areas.",
-        category: "Education",
-        isPublic: true,
-        author: "Jane Smith",
-        date: "2024-03-14"
-    }
-];
+import { supabase } from "@/supabase";
 
 export const submitIdea = async (data: IdeaInput): Promise<{ id: string; status: 'success' }> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Idea Submitted:", data);
-            const newIdea = {
-                ...data,
-                id: Math.random().toString(36).substring(7),
-                author: "Current User",
-                date: new Date().toISOString().split('T')[0]
-            };
-            ideas.unshift(newIdea);
-            resolve({
-                id: newIdea.id,
-                status: 'success'
-            });
-        }, 1500); // Simulate network delay
-    });
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !userData.user) {
+        throw new Error("User not authenticated");
+    }
+
+    const { data: ideaData, error } = await supabase
+        .from('ideas')
+        .insert([
+            {
+                title: data.title,
+                description: data.description,
+                category: data.category,
+                is_public: data.isPublic,
+                user_id: userData.user.id
+            }
+        ])
+        .select()
+        .single();
+
+    if (error) {
+        console.error("Supabase error:", error);
+        throw new Error(error.message);
+    }
+
+    return {
+        id: ideaData.id,
+        status: 'success'
+    };
 };
 
-export const fetchIdeas = async (): Promise<typeof ideas> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(ideas);
-        }, 1000);
-    });
+export const fetchIdeas = async (): Promise<any[]> => {
+    const { data, error } = await supabase
+        .from('ideas')
+        .select(`
+            *,
+            profiles (full_name)
+        `)
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    // Map response to match expected frontend structure if needed, or update frontend
+    return data.map(idea => ({
+        id: idea.id,
+        title: idea.title,
+        description: idea.description,
+        category: idea.category,
+        isPublic: idea.is_public,
+        author: idea.profiles?.full_name || "Unknown Author",
+        date: new Date(idea.created_at).toLocaleDateString()
+    }));
 };
