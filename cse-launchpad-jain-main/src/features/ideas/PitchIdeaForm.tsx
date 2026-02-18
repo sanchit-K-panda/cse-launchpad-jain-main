@@ -63,6 +63,24 @@ export const PitchIdeaForm = () => {
 
                         <FormField
                             control={form.control}
+                            name="author"
+                            render={({ field }) => (
+                                <FormItem className="space-y-3 group">
+                                    <FormLabel className="text-slate-300 text-sm font-medium uppercase tracking-wider group-focus-within:text-cyan-400 transition-colors">Your Name (Optional)</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Anonymous"
+                                            {...field}
+                                            className="bg-slate-900/50 border-white/10 text-white h-12 focus-visible:ring-cyan-500/50 transition-all duration-300 focus:bg-slate-900/80"
+                                        />
+                                    </FormControl>
+                                    <FormMessage className="text-red-400" />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
                             name="category"
                             render={({ field }) => (
                                 <FormItem className="space-y-3 group">

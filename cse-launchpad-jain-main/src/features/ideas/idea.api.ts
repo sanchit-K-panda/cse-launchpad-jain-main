@@ -20,7 +20,7 @@ export const submitIdea = async (data: IdeaInput): Promise<{ id: string; status:
 
     const result = await sql`
       INSERT INTO ideas (title, description, category, is_public, author)
-      VALUES (${data.title}, ${data.description}, ${data.category}, ${data.isPublic}, 'Current User')
+      VALUES (${data.title}, ${data.description}, ${data.category}, ${data.isPublic}, ${data.author || 'Anonymous'})
       RETURNING id
     `;
 
