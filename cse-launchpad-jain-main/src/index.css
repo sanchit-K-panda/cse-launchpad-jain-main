@@ -87,7 +87,7 @@
   }
 
   .text-gradient-cyan {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-[hsl(200,100%,70%)];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400;
   }
 
   .text-gradient-purple {
