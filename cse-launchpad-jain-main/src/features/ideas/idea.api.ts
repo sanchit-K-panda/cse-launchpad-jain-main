@@ -1,59 +1,50 @@
 import { IdeaInput } from "./idea.schema";
-import { supabase } from "@/supabase";
+
+// Mock Data
+const MOCK_IDEAS = [
+    {
+        id: "1",
+        title: "Smart Waste Management",
+        description: "IoT-based waste bins that notify collection trucks when full.",
+        category: "Environment",
+        isPublic: true,
+        author: "Khush",
+        date: "2024-03-15"
+    },
+    {
+        id: "2",
+        title: "AI Tutor for Rural Education",
+        description: "An offline-first AI tutor app for students in remote areas.",
+        category: "Education",
+        isPublic: true,
+        author: "Jitesh",
+        date: "2024-03-14"
+    }
+];
 
 export const submitIdea = async (data: IdeaInput): Promise<{ id: string; status: 'success' }> => {
-    const { data: userData, error: userError } = await supabase.auth.getUser();
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const newIdea = {
+                ...data,
+                id: Math.random().toString(36).substring(7),
+                author: "Test User",
+                date: new Date().toLocaleDateString()
+            };
+            MOCK_IDEAS.unshift(newIdea);
 
-    if (userError || !userData.user) {
-        throw new Error("User not authenticated");
-    }
-
-    const { data: ideaData, error } = await supabase
-        .from('ideas')
-        .insert([
-            {
-                title: data.title,
-                description: data.description,
-                category: data.category,
-                is_public: data.isPublic,
-                user_id: userData.user.id
-            }
-        ])
-        .select()
-        .single();
-
-    if (error) {
-        console.error("Supabase error:", error);
-        throw new Error(error.message);
-    }
-
-    return {
-        id: ideaData.id,
-        status: 'success'
-    };
+            resolve({
+                id: newIdea.id,
+                status: 'success'
+            });
+        }, 1000);
+    });
 };
 
 export const fetchIdeas = async (): Promise<any[]> => {
-    const { data, error } = await supabase
-        .from('ideas')
-        .select(`
-            *,
-            profiles (full_name)
-        `)
-        .order('created_at', { ascending: false });
-
-    if (error) {
-        throw new Error(error.message);
-    }
-
-    // Map response to match expected frontend structure if needed, or update frontend
-    return data.map(idea => ({
-        id: idea.id,
-        title: idea.title,
-        description: idea.description,
-        category: idea.category,
-        isPublic: idea.is_public,
-        author: idea.profiles?.full_name || "Unknown Author",
-        date: new Date(idea.created_at).toLocaleDateString()
-    }));
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([...MOCK_IDEAS]);
+        }, 1000);
+    });
 };
