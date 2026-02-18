@@ -48,8 +48,10 @@ const SignUpPage = () => {
 
             <Card className="relative z-10 w-full max-w-md border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:scale-[1.005] hover:shadow-indigo-500/10 animate-in fade-in slide-in-from-bottom-8">
                 <CardHeader className="space-y-2 text-center pb-8">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 ring-1 ring-indigo-500/40">
-                        <User className="h-6 w-6 text-indigo-400" />
+                    <div className="mx-auto mb-4 inline-block p-3 rounded-2xl bg-white/5 border border-white/10 shadow-lg">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500">
+                            <User className="h-4 w-4 text-white" />
+                        </div>
                     </div>
                     <CardTitle className="text-3xl font-bold tracking-tight text-white drop-shadow-sm">Create an account</CardTitle>
                     <CardDescription className="text-slate-400 text-base">

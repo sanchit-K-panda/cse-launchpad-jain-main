@@ -14,7 +14,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingOrbs from "./components/FloatingOrbs";
-import LoginPage from "./features/auth/LoginPage";
+import Login from "./pages/Login";
 import SignUpPage from "./features/auth/SignUpPage";
 import MentorsPage from "./pages/MentorsPage";
 import IdeaversePage from "./pages/IdeaversePage";
@@ -63,14 +63,14 @@ const App = () => (
           <FloatingOrbs />
           <Layout>
             <Routes>
-              <Route path="/" element={<LoginPage />} />
+              <Route path="/" element={<Login />} />
               <Route path="/home" element={<Index />} />
               <Route path="/about" element={<About />} />
               <Route path="/events/:slug" element={<EventDetail />} />
               <Route path="/events" element={<Events />} />
               <Route path="/vision" element={<Vision />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/mentors" element={<MentorsPage />} />
               <Route path="/ideaverse" element={<IdeaversePage />} />
