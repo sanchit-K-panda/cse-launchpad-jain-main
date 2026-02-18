@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { submitIdea, fetchIdeas } from "./idea.api";
-import { IdeaInput } from "./idea.schema";
+import { IdeaInput, Idea } from "./idea.schema";
 import { useToast } from "@/components/ui/use-toast";
 
 export const useSubmitIdea = () => {
@@ -28,7 +28,7 @@ export const useSubmitIdea = () => {
 };
 
 export const useGetIdeas = () => {
-    return useQuery({
+    return useQuery<Idea[]>({
         queryKey: ["ideas"],
         queryFn: fetchIdeas,
     });
