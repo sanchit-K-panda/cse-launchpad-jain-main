@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, Link } from "react-router-dom";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, User, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLogin } from "./useLogin";
 import { loginSchema, LoginInput } from "./login.schema";
+import { cn } from "@/lib/utils";
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -22,8 +23,11 @@ const LoginPage = () => {
             email: "",
             password: "",
             rememberMe: false,
+            role: "student",
         },
     });
+
+    const currentRole = form.watch("role");
 
     const onSubmit = (data: LoginInput) => {
         login(data, {
@@ -44,6 +48,39 @@ const LoginPage = () => {
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+
+                        {/* Role Selection */}
+                        <div className="grid grid-cols-2 gap-4 mb-2">
+                            <div
+                                onClick={() => form.setValue("role", "student")}
+                                className={cn(
+                                    "cursor-pointer rounded-lg border-2 p-3 text-center transition-all duration-200 hover:bg-white/5",
+                                    currentRole === "student"
+                                        ? "border-cyan-500 bg-cyan-500/10"
+                                        : "border-white/10 bg-white/5 text-slate-400"
+                                )}
+                            >
+                                <div className="flex flex-col items-center gap-1">
+                                    <User className={cn("h-5 w-5", currentRole === "student" ? "text-cyan-400" : "text-slate-400")} />
+                                    <span className={cn("text-xs font-medium", currentRole === "student" ? "text-white" : "text-slate-400")}>Student</span>
+                                </div>
+                            </div>
+                            <div
+                                onClick={() => form.setValue("role", "mentor")}
+                                className={cn(
+                                    "cursor-pointer rounded-lg border-2 p-3 text-center transition-all duration-200 hover:bg-white/5",
+                                    currentRole === "mentor"
+                                        ? "border-purple-500 bg-purple-500/10"
+                                        : "border-white/10 bg-white/5 text-slate-400"
+                                )}
+                            >
+                                <div className="flex flex-col items-center gap-1">
+                                    <GraduationCap className={cn("h-5 w-5", currentRole === "mentor" ? "text-purple-400" : "text-slate-400")} />
+                                    <span className={cn("text-xs font-medium", currentRole === "mentor" ? "text-white" : "text-slate-400")}>Mentor</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="space-y-2">
                             <Label htmlFor="email" className="text-white">Email</Label>
                             <Input
