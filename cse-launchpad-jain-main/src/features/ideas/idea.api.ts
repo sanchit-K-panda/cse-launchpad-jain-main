@@ -1,51 +1,46 @@
 import { IdeaInput } from "./idea.schema";
 
 
-// Mock database
-const ideas: (IdeaInput & { id: string, author: string, date: string })[] = [
-    {
-        id: "1",
-        title: "Smart Waste Management",
-        description: "IoT-based waste bins that notify collection trucks when full.",
-        category: "Environment",
-        isPublic: true,
-        author: "John Doe",
-        date: "2024-03-15"
-    },
-    {
-        id: "2",
-        title: "AI Tutor for Rural Education",
-        description: "An offline-first AI tutor app for students in remote areas.",
-        category: "Education",
-        isPublic: true,
-        author: "Jane Smith",
-        date: "2024-03-14"
-    }
-];
+import { sql } from "@/lib/db";
 
 export const submitIdea = async (data: IdeaInput): Promise<{ id: string; status: 'success' }> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Idea Submitted:", data);
-            const newIdea = {
-                ...data,
-                id: Math.random().toString(36).substring(7),
-                author: "Current User",
-                date: new Date().toISOString().split('T')[0]
-            };
-            ideas.unshift(newIdea);
-            resolve({
-                id: newIdea.id,
-                status: 'success'
-            });
-        }, 1500); // Simulate network delay
-    });
+    // Basic validation or transformation could happen here
+    // In a real app, you'd want to handle user authentication and get the real user ID
+
+    // Note: The 'ideas' table needs to exist.
+    // CREATE TABLE IF NOT EXISTS ideas (
+    //   id SERIAL PRIMARY KEY,
+    //   title TEXT NOT NULL,
+    //   description TEXT NOT NULL,
+    //   category TEXT NOT NULL,
+    //   is_public BOOLEAN DEFAULT true,
+    //   author TEXT DEFAULT 'Anonymous',
+    //   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    // );
+
+    const result = await sql`
+      INSERT INTO ideas (title, description, category, is_public, author)
+      VALUES (${data.title}, ${data.description}, ${data.category}, ${data.isPublic}, 'Current User')
+      RETURNING id
+    `;
+
+    return {
+        id: result[0].id,
+        status: 'success'
+    };
 };
 
-export const fetchIdeas = async (): Promise<typeof ideas> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(ideas);
-        }, 1000);
-    });
+export const fetchIdeas = async () => {
+    const ideas = await sql`
+        SELECT * FROM ideas ORDER BY created_at DESC
+    `;
+
+    // Map DB fields to FE schema if necessary (e.g. snake_case to camelCase)
+    // For now assuming slight differences or handling in component, 
+    // but best practice is to align them.
+    return ideas.map(idea => ({
+        ...idea,
+        isPublic: idea.is_public,
+        date: new Date(idea.created_at).toISOString().split('T')[0]
+    }));
 };
