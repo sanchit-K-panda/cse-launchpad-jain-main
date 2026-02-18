@@ -7,6 +7,8 @@ export const useLogin = () => {
         mutationFn: (data: LoginInput) => loginUser(data),
         onSuccess: (data) => {
             localStorage.setItem("token", data.token);
+            localStorage.setItem("role", data.user.role);
+            localStorage.setItem("user", JSON.stringify(data.user));
         },
     });
 };

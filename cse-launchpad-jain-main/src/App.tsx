@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import React, { useEffect } from "react";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -16,6 +16,8 @@ import Footer from "./components/Footer";
 import FloatingOrbs from "./components/FloatingOrbs";
 import LoginPage from "./features/auth/LoginPage";
 import SignUpPage from "./features/auth/SignUpPage";
+import MentorsPage from "./pages/MentorsPage";
+import IdeaversePage from "./pages/IdeaversePage";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,20 @@ function LenisScroll({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const hideNavbarRoutes = ["/", "/signup", "/login"];
+  const showNavbar = !hideNavbarRoutes.includes(location.pathname);
+
+  return (
+    <>
+      {showNavbar && <Navbar />}
+      {children}
+      {showNavbar && <Footer />}
+    </>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -45,20 +61,22 @@ const App = () => (
       <BrowserRouter>
         <LenisScroll>
           <FloatingOrbs />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/events/:slug" element={<EventDetail />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/vision" element={<Vision />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
+          <Layout>
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/home" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/events/:slug" element={<EventDetail />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/vision" element={<Vision />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/mentors" element={<MentorsPage />} />
+              <Route path="/ideaverse" element={<IdeaversePage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
         </LenisScroll>
       </BrowserRouter>
     </TooltipProvider>

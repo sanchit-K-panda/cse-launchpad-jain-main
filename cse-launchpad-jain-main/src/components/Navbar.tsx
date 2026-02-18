@@ -4,7 +4,8 @@ import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import { Button } from "./ui/button";
 
-const links = [
+// Basic public links
+const publicLinks = [
   { label: "Home", to: "/home" },
   { label: "About", to: "/about" },
   { label: "Events", to: "/events" },
@@ -15,6 +16,20 @@ const links = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const role = localStorage.getItem("role");
+
+  // Determine links based on role
+  const links = [...publicLinks];
+  if (role === "student") {
+    links.push(
+      { label: "Our Mentors", to: "/mentors" },
+      { label: "Ideaverse", to: "/ideaverse" }
+    );
+  } else if (role === "mentor") {
+    links.push(
+      { label: "Ideaverse", to: "/ideaverse" }
+    );
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
