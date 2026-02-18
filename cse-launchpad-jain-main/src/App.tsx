@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingOrbs from "./components/FloatingOrbs";
+import LoginPage from "./features/auth/LoginPage";
 
 const queryClient = new QueryClient();
 
@@ -45,12 +46,14 @@ const App = () => (
           <FloatingOrbs />
           <Navbar />
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/home" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/events/:slug" element={<EventDetail />} />
             <Route path="/events" element={<Events />} />
             <Route path="/vision" element={<Vision />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

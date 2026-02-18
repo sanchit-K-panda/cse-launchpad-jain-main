@@ -1,0 +1,12 @@
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "./login.api";
+import { LoginInput } from "./login.schema";
+
+export const useLogin = () => {
+    return useMutation({
+        mutationFn: (data: LoginInput) => loginUser(data),
+        onSuccess: (data) => {
+            localStorage.setItem("token", data.token);
+        },
+    });
+};

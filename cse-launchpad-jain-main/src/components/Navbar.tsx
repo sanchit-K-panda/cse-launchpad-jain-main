@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import { Button } from "./ui/button";
 
 const links = [
-  { label: "Home", to: "/" },
+  { label: "Home", to: "/home" },
   { label: "About", to: "/about" },
   { label: "Events", to: "/events" },
   { label: "Vision", to: "/vision" },
@@ -32,11 +32,10 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm font-medium transition-colors ${
-                location.pathname === l.to
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-primary"
-              }`}
+              className={`text-sm font-medium transition-colors ${location.pathname === l.to
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+                }`}
             >
               {l.label}
             </Link>
@@ -57,11 +56,10 @@ const Navbar = () => {
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className={`text-base font-medium transition-colors ${
-                location.pathname === l.to
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-primary"
-              }`}
+              className={`text-base font-medium transition-colors ${location.pathname === l.to
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+                }`}
             >
               {l.label}
             </Link>
