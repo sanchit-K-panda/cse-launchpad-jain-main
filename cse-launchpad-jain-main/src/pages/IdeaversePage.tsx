@@ -16,7 +16,7 @@ const IdeaversePage = () => {
             <Navbar />
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-sm">
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6 text-primary drop-shadow-sm">
                         {role === "mentor" ? "Review Pitches" : "Ideaverse"}
                     </h1>
                     <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">

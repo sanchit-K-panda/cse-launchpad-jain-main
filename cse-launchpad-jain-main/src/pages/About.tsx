@@ -36,9 +36,9 @@ const About = () => (
         <AnimatedSection>
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="text-primary font-medium tracking-widest uppercase text-xs mb-4">About Us</p>
-              <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                Transforming Students into <span className="text-gradient-purple">Founders</span>
+              <p className="text-primary font-bold tracking-widest uppercase text-lg mb-4">About Us</p>
+              <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Incubating <span className="text-primary">Excellence</span>
               </h1>
             </div>
             <div className="space-y-5 text-muted-foreground leading-relaxed">

@@ -15,7 +15,7 @@ const Index = () => {
           <AnimatedSection delay={0.1}>
             <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight mb-8">
               Engineering the{" "}
-              <span className="text-gradient-cyan">Architects</span>{" "}
+              <span className="text-primary">Architects</span>{" "}
               of Tomorrow
             </h1>
           </AnimatedSection>
@@ -40,7 +40,7 @@ const Index = () => {
           <AnimatedSection>
             <p className="text-primary font-medium tracking-widest uppercase text-xs mb-4">Who We Are</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
-              Building the <span className="text-gradient-purple">Future</span>, Together
+              Building the <span className="text-accent">Future</span>, Together
             </h2>
             <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
               CSE Launchpad operates at the intersection of academic rigor and entrepreneurial ambition. We are an institutional engine designed to systematically convert technical talent into market-ready founders through structured programs, capital pathways, and a world-class mentor network.
@@ -57,7 +57,7 @@ const Index = () => {
         <AnimatedSection>
           <div className="max-w-3xl mx-auto text-center glass-card p-12 md:p-16 glow-cyan">
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
-              Ready to <span className="text-gradient-cyan">Launch</span>?
+              Ready to <span className="text-primary">Launch</span>?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed">
               Join the next cohort of founders building the future. Applications are reviewed on a rolling basis—exceptional founders are admitted regardless of stage.

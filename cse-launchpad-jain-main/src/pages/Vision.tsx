@@ -24,7 +24,8 @@ const Vision = () => (
         <AnimatedSection>
           <p className="text-primary font-medium tracking-widest uppercase text-xs mb-4">Our North Star</p>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-8">
-            Vision <span className="text-gradient-purple">2026 and Beyond</span>
+            The <span className="text-accent">Future</span>
+            <br />We Are Building
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             To build an innovative ecosystem where anyone can start a business and succeed—regardless of background, geography, or access to traditional networks.
@@ -55,9 +56,9 @@ const Vision = () => (
       <div className="max-w-3xl mx-auto">
         <AnimatedSection>
           <p className="text-primary font-medium tracking-widest uppercase text-xs mb-4 text-center">Roadmap</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-16 text-center">
-            Strategic <span className="text-gradient-cyan">Milestones</span>
-          </h2>
+          <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            Our <span className="text-primary">North Star</span>
+          </h1>
         </AnimatedSection>
         <div className="relative">
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border" />

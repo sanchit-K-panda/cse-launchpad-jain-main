@@ -10,8 +10,8 @@ const Events = () => (
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           <p className="text-primary font-medium tracking-widest uppercase text-xs mb-4 text-center">Upcoming Initiatives</p>
-          <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-6 text-center">
-            Curated <span className="text-gradient-purple">Events</span>
+          <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 leading-tight text-center">
+            Upcoming <span className="text-primary">Events</span>
           </h1>
           <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-16 leading-relaxed">
             Each event is designed to deliver actionable insights, forge meaningful connections, and accelerate your entrepreneurial journey.

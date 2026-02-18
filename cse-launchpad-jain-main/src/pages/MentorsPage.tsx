@@ -43,7 +43,7 @@ const MentorsPage = () => {
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
                         Our Mentors
                     </h1>
                     <p className="text-xl text-slate-400 max-w-2xl mx-auto">
