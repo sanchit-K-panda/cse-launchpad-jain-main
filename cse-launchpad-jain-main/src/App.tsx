@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingOrbs from "./components/FloatingOrbs";
 import LoginPage from "./features/auth/LoginPage";
+import SignUpPage from "./features/auth/SignUpPage";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/vision" element={<Vision />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
