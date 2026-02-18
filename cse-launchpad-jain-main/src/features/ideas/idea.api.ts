@@ -1,14 +1,15 @@
 import { IdeaInput } from "./idea.schema";
 
-// Mock Data
-const MOCK_IDEAS = [
+
+// Mock database
+const ideas: (IdeaInput & { id: string, author: string, date: string })[] = [
     {
         id: "1",
         title: "Smart Waste Management",
         description: "IoT-based waste bins that notify collection trucks when full.",
         category: "Environment",
         isPublic: true,
-        author: "Khush",
+        author: "John Doe",
         date: "2024-03-15"
     },
     {
@@ -17,7 +18,7 @@ const MOCK_IDEAS = [
         description: "An offline-first AI tutor app for students in remote areas.",
         category: "Education",
         isPublic: true,
-        author: "Jitesh",
+        author: "Jane Smith",
         date: "2024-03-14"
     }
 ];
@@ -25,26 +26,26 @@ const MOCK_IDEAS = [
 export const submitIdea = async (data: IdeaInput): Promise<{ id: string; status: 'success' }> => {
     return new Promise((resolve) => {
         setTimeout(() => {
+            console.log("Idea Submitted:", data);
             const newIdea = {
                 ...data,
                 id: Math.random().toString(36).substring(7),
-                author: "Test User",
-                date: new Date().toLocaleDateString()
+                author: "Current User",
+                date: new Date().toISOString().split('T')[0]
             };
-            MOCK_IDEAS.unshift(newIdea);
-
+            ideas.unshift(newIdea);
             resolve({
                 id: newIdea.id,
                 status: 'success'
             });
-        }, 1000);
+        }, 1500); // Simulate network delay
     });
 };
 
-export const fetchIdeas = async (): Promise<any[]> => {
+export const fetchIdeas = async (): Promise<typeof ideas> => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve([...MOCK_IDEAS]);
+            resolve(ideas);
         }, 1000);
     });
 };

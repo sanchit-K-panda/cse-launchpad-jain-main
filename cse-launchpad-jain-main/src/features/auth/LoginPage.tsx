@@ -184,8 +184,6 @@ const LoginPage = () => {
                     </p>
                 </CardFooter>
             </Card>
-
-
         </div>
     );
 };

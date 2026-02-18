@@ -1,36 +1,21 @@
 import { LoginInput } from "./login.schema";
 
-export const loginUser = async (data: LoginInput): Promise<{ token: string; user: any }> => {
+export const loginUser = async (data: LoginInput): Promise<{ token: string; user: { name: string; email: string; role: string } }> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            // Dummy Credentials Logic
-            let user = null;
-
-            if (data.email === "khush@example.com" && data.password === "password123") {
-                user = { id: "1", name: "Khush", email: "khush@example.com", role: "student" };
-            } else if (data.email === "jitesh@example.com" && data.password === "password123") {
-                user = { id: "2", name: "Jitesh", email: "jitesh@example.com", role: "student" };
-            } else if (data.email === "kamlesh@example.com" && data.password === "password123") {
-                user = { id: "3", name: "Kamlesh Tiwari", email: "kamlesh@example.com", role: "mentor" };
-            }
-
-            if (user) {
-                // Determine if the role matches the requested role in UI (optional strictness)
-                // For testing, we can just return the user's actual role or the requested one.
-                // Let's rely on the hardcoded user role.
-
+            // Mock validation - Allow any valid input for development
+            if (data.email && data.password.length >= 6) {
                 resolve({
-                    token: "mock-jwt-token-" + Date.now(),
+                    token: "fake-jwt-token-" + Math.random().toString(36).substring(7),
                     user: {
-                        id: user.id,
-                        email: user.email,
-                        role: user.role, // Use the hardcoded role
-                        full_name: user.name,
-                    },
+                        name: "Test User",
+                        email: data.email,
+                        role: data.role // Return the selected role
+                    }
                 });
             } else {
-                reject(new Error("Invalid credentials. Try khush@example.com / password123"));
+                reject(new Error("Invalid email or password"));
             }
-        }, 1000);
+        }, 1000); // Simulate network delay
     });
 };

@@ -1,17 +1,16 @@
 import { SignupInput } from "./signup.schema";
 
-export const registerUser = async (data: SignupInput): Promise<{ token: string; user: any }> => {
+export const registerUser = async (data: SignupInput): Promise<{ token: string; user: { name: string; email: string; role: string } }> => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve({
-                token: "mock-session-token",
+                token: "fake-jwt-token-" + Math.random().toString(36).substring(7),
                 user: {
-                    id: Math.random().toString(36).substring(7),
+                    name: data.name,
                     email: data.email,
                     role: data.role,
-                    full_name: data.name,
                 },
             });
-        }, 1000);
+        }, 1000); // Simulate network delay
     });
 };
