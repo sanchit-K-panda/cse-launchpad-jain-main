@@ -1,4 +1,4 @@
-import { IdeaInput } from "./idea.schema";
+import { IdeaInput, Idea } from "./idea.schema";
 
 
 import { sql } from "@/lib/db";
@@ -30,7 +30,7 @@ export const submitIdea = async (data: IdeaInput): Promise<{ id: string; status:
     };
 };
 
-export const fetchIdeas = async () => {
+export const fetchIdeas = async (): Promise<Idea[]> => {
     const ideas = await sql`
         SELECT * FROM ideas ORDER BY created_at DESC
     `;
@@ -40,7 +40,13 @@ export const fetchIdeas = async () => {
     // but best practice is to align them.
     return ideas.map(idea => ({
         ...idea,
-        isPublic: idea.is_public,
+        id: idea.id,
+        title: idea.title,
+        description: idea.description,
+        category: idea.category,
+        author: idea.author || 'Anonymous',
+        isPublic: idea.is_public ?? true,
+        created_at: idea.created_at,
         date: new Date(idea.created_at).toISOString().split('T')[0]
     }));
 };

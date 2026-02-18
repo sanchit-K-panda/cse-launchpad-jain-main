@@ -9,3 +9,14 @@ export const ideaSchema = z.object({
 });
 
 export type IdeaInput = z.infer<typeof ideaSchema>;
+
+export interface Idea {
+    id: number;
+    title: string;
+    description: string;
+    category: string;
+    isPublic: boolean;
+    author: string;
+    created_at: string;
+    date: string;
+}
